@@ -1,0 +1,28 @@
+---
+
+trigger:
+  - workshop-develop
+
+
+stages:
+  - stage: buildstage
+    displayName: Build flea commerce
+    pool:
+      vmImage: ubuntu-22.04
+    jobs:
+      - job: buildJob
+        displayName: Build and Publish
+        steps:
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: build
+              projects: src/NopCommerce.sln
+          - task: CopyFiles@2
+            inputs:
+              contents: 'src/Presentation/Nop.Web/bin/Debug/net7.0/**'
+              targetFolder: $(Build.ArtifactStagingDirectory)
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathToPublish: $(Build.ArtifactStagingDirectory)
+              artifactName: nopreleaseartifacts
+  # artifacts src/Presentation/Nop.Web/bin/Debug/net7.0
