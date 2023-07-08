@@ -18,3 +18,5 @@ stages:
              command: 'buildAndPush'
              Dockerfile: '**/Dockerfile'
              containerRegistry: 'mydockerhub'
+             repository: 'shaikkhajaibrahim/fleacommerce'
+             tags: latest
