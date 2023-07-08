@@ -1,0 +1,20 @@
+---
+
+# trigger:
+#   - workshop-develop
+
+
+stages:
+  - stage: buildstage
+    displayName: Build flea commerce
+    pool:
+      vmImage: ubuntu-22.04
+    jobs:
+      - job: buildJob
+        displayName: Build and Publish
+        steps:
+         - task: Docker@2
+           inputs:
+             command: 'buildAndPush'
+             Dockerfile: '**/Dockerfile'
+             containerRegistry: 'mydockerhub'
