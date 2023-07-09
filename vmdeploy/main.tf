@@ -2,7 +2,7 @@ resource "aws_instance" "nop" {
   ami             = "ami-0c65adc9a5c1b5d7c"
   instance_type   = "t2.micro"
   key_name        = "foransible"
-  vpc_security_group_ids = "sg-05adaf452b268c335"
+  vpc_security_group_ids = ["sg-05adaf452b268c335"]
   tags = {
     Name = "nop"
   }
