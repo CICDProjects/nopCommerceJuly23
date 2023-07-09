@@ -26,3 +26,16 @@ stages:
               pathToPublish: $(Build.ArtifactStagingDirectory)
               artifactName: nopreleaseartifacts
   # artifacts src/Presentation/Nop.Web/bin/Debug/net7.0
+  - stage: deploy
+    displayName: Deploy flea commerce
+    pool: Default
+    jobs:
+      - job: deployJob
+        displayName: Terraform Deploy Job
+        steps:
+          - bash: terraform init
+            displayName: Initialize Terraform
+            workingDirectory: vmdeploy
+          - bash: terraform apply -auto-approve
+            displayName: Deploy Terraform
+            workingDirectory: vmdeploy
