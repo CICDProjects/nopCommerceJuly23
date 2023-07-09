@@ -49,6 +49,6 @@ stages:
             workingDirectory: vmdeploy
           - bash: export ANSIBLE_HOST_KEY_CHECKING=False
             displayName: HOST key checking set to false
-          - bash: "ansible-playbook -i hosts --key-file '/home/ubuntu/foransible_new.pem' nopdeploy.yaml"
+          - bash: "ansible-playbook -i hosts --key-file '/home/Dell/foransible_new.pem' nopdeploy.yaml"
             displayName: Provision using ansible
             workingDirectory: vmdeploy 
