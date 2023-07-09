@@ -44,6 +44,9 @@ stages:
           - bash: terraform apply -auto-approve
             displayName: Deploy Terraform
             workingDirectory: vmdeploy
-          - bash: "ansible-playbook -i $(terraform output -raw nop_url) --key-file '/home/ubuntu/foransible_new.pem' nopdeploy.yaml"
+          - bash: terraform output -raw nop_url > hosts
+            displayName: Create Ansible hosts
+            workingDirectory: vmdeploy
+          - bash: "ansible-playbook -i hosts --key-file '/home/ubuntu/foransible_new.pem' nopdeploy.yaml"
             displayName: Provision using ansible
             workingDirectory: vmdeploy 

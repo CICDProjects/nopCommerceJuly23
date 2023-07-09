@@ -6,5 +6,5 @@ resource "aws_instance" "nop" {
   }
 }
 output "nop_url" {
-  value = format("%s ansible_user=ubuntu, ", aws_instance.nop.public_ip)
+  value = format("%s ansible_user=ubuntu", aws_instance.nop.public_ip)
 }
