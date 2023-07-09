@@ -33,6 +33,11 @@ stages:
       - job: deployJob
         displayName: Terraform Deploy Job
         steps:
+          - task: DownloadBuildArtifacts@1
+            inputs:
+              buildType: 'current'
+              artifactName: nopreleaseartifacts
+              downloadPath: /tmp
           - bash: terraform init
             displayName: Initialize Terraform
             workingDirectory: vmdeploy
