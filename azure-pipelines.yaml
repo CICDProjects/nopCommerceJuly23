@@ -47,6 +47,8 @@ stages:
           - bash: terraform output -raw nop_url > hosts
             displayName: Create Ansible hosts
             workingDirectory: vmdeploy
+          - bash: export ANSIBLE_HOST_KEY_CHECKING=False
+            displayName: HOST key checking set to false
           - bash: "ansible-playbook -i hosts --key-file '/home/ubuntu/foransible_new.pem' nopdeploy.yaml"
             displayName: Provision using ansible
             workingDirectory: vmdeploy 
