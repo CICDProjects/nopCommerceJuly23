@@ -28,9 +28,14 @@
         path: /var/www/nopCommerce
         state: directory
     - name: Download nopCommerce-zip file
-      ansible.builtin.copy:
-        src: /tmp/nopreleaseartifacts/src/Presentation/Nop.Web/bin/Debug/net7.0
-        dest: /var/www/nopCommerce    
+      ansible.builtin.get_url:
+        url: https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.3/nopCommerce_4.60.3_NoSource_linux_x64.zip
+        dest: /var/www/nopCommerce
+    - name: Unzip a file that is already on the remote machine
+      ansible.builtin.unarchive:
+        src: /var/www/nopCommerce/nopCommerce_4.60.3_NoSource_linux_x64.zip
+        dest: /var/www/nopCommerce/
+        remote_src: yes
     - name: Change file ownership, group and permissions
       ansible.builtin.file:
         path: /var/www/nopCommerce
